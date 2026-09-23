@@ -28,7 +28,7 @@ class WebCheckout(Checkout):
 
 class WebNotification(Notification):
     def send(self, order):
-        print("Notificação de pedido mandado para o browser!")
+        print("Notificação de pedido mandada para o browser!")
         print(order)
 
 class WebFactory(ChannelFactory):
@@ -46,7 +46,7 @@ class MobileCheckout(Checkout):
 
 class MobileNotification(Notification):
     def send(self, order):
-        print("Notificação de pedido mandado para a palma da mão!")
+        print("Notificação de pedido mandada para a palma da mão!")
         print(order)
 
 class MobileFactory(ChannelFactory):
