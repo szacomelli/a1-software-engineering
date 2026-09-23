@@ -64,8 +64,7 @@ available_channels = {
 
 def get_channel_factory(channel):
     if channel not in available_channels:
-        raise(
-            ValueError,
+        raise ValueError(
             "you must use one of the available channels: ", available_channels.keys()
         )
 
