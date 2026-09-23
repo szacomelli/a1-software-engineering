@@ -15,8 +15,9 @@ class PaymentProcessor(ABC):
     #     payment = self.create_payment()
     #     payment.pay(order.total())
     def process_order(self, order):
-        order.pay_method = self.create_payment()
-        payment.pay(order.total())
+        if order.pay_method == None:
+            order.pay_method = self.create_payment()
+        order.pay_method.pay(order.total())
 
 
 class PixPayment(Payment):
