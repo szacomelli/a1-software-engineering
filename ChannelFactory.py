@@ -57,9 +57,28 @@ class MobileFactory(ChannelFactory):
         return MobileNotification()
 
 
+class KioskCheckout(Checkout):
+    def show(self, order):
+        print("Pedido feito em seja lá o que isso for:")
+        print(order)
+
+class KioskNotification(Notification):
+    def send(self, order):
+        print("Notificação de pedido mandada para algum lugar!")
+        print(order)
+
+class KioskFactory(ChannelFactory):
+    def create_checkout(self):
+        return KioskCheckout()
+
+    def create_notification(self):
+        return KioskNotification()
+
+
 available_channels = {
     "WEB" : WebFactory,
-    "MOBILE" : MobileFactory
+    "MOBILE" : MobileFactory,
+    "KIOSK" : KioskFactory
 }
 
 def get_channel_factory(channel):
