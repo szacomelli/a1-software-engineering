@@ -23,7 +23,7 @@ class Flow:
         ChannelFactory.available_channels = available_channels
 
     def main(self, channel, get_order):
-        config = AppConfig.AppConfig()
+        config = AppConfig.AppConfig("production", "BRL", True)
 
         order = get_order()
 
@@ -35,7 +35,13 @@ class Flow:
         self.processor.process_order(order)
         notification.send(order)
 
+        if config.debug:
+            self.save_log()
+
         return
+
+    def save_log(self):
+        print("log foi salvo")
 
 
 channels = {
