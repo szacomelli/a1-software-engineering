@@ -20,6 +20,3 @@ class AppConfig:
         self.currency = currency
         self.debug = debug
         self.__created = True
-
-
-config = AppConfig("production", "BRL", False)
