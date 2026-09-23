@@ -55,3 +55,18 @@ class MobileFactory(ChannelFactory):
 
     def create_notification(self):
         return MobileNotification()
+
+
+available_channels = {
+    "WEB" : WebFactory,
+    "MOBILE" : MobileFactory
+}
+
+def get_channel_factory(channel):
+    if channel not in available_channels:
+        raise(
+            ValueError,
+            "you must use one of the available channels: ", available_channels.keys()
+        )
+
+    return available_channels[channel]()
