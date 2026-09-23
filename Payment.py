@@ -11,8 +11,11 @@ class PaymentProcessor(ABC):
     def create_payment(self):
         pass
 
+    # def process_order(self, order):
+    #     payment = self.create_payment()
+    #     payment.pay(order.total())
     def process_order(self, order):
-        payment = self.create_payment()
+        order.pay_method = self.create_payment()
         payment.pay(order.total())
 
 
@@ -40,7 +43,3 @@ class CreditCardProcessor(PaymentProcessor):
 class BoletoProcessor(PaymentProcessor):
     def create_payment(self):
         return BoletoPayment()
-
-class MockOrder:
-    def total(self):
-        return 10
