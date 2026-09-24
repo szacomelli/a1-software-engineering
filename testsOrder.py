@@ -1,14 +1,17 @@
 import unittest
 import Order
 
-class Testes(unittest.TestCase):
+
+class orderTests(unittest.TestCase):
   def test_without_client(self):
+    # Test if the build without a client raises an error
     builder = Order.OrderBuilder(Order.Order)
     with self.assertRaises(ValueError):
       builder.build()
 
 
   def test_with_two_attributes(self):
+    # Testing build with two optional attributes
     builder = Order.OrderBuilder(Order.Order)
     order = (
       builder.set_client(Order.Client("Ada Lovelace"))
@@ -23,7 +26,8 @@ class Testes(unittest.TestCase):
     self.assertEqual(order.pay_method, None)
 
 
-  def test_with_two_itens(self):
+  def test_with_two_items(self):
+    # Testing build with two items
     builder = Order.OrderBuilder(Order.Order)
     order = (
       builder.set_client(Order.Client("Ada Lovelace"))

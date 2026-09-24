@@ -6,7 +6,7 @@ class Product():
 
 
   def __str__(self):
-    return f"{self.name}; Quantity: {self.quantity}; Price: {self.price}"
+    return f"{self.name}; Quantity: {self.quantity}; Price: {self.price:.2f}"
 
 
 class Client():
@@ -38,10 +38,10 @@ class Order():
   def __str__(self):
     prods = "".join(f" - {idx+1}: {product}\n" for idx, product in enumerate(self.products))
     text = [f"Client name: {self.client or 'None'}\n",
-      f"Coupon used: {self.coupon} \n" if self.coupon else "",
-      f"Address inputed: {self.address or 'Not specified'}\n" if self.address else "",
-      f"Payment method: {self.pay_method or 'Not specified'}\n" if self.pay_method else "",
-      f"Obs.: {self.observation or 'None'}\n" if self.observation else "",
+      f"Coupon used: {self.coupon}\n" if self.coupon else "",
+      f"Address inputed: {self.address}\n" if self.address else "",
+      f"Payment method: {self.pay_method}\n" if self.pay_method else "",
+      f"Obs.: {self.observation}\n" if self.observation else "",
       f"Products:\n{prods}"]
 
     return "".join(txt for txt in text)
@@ -52,32 +52,38 @@ class OrderBuilder():
     self.order = order(None)
 
 
-  def set_client(self, client):
+  def set_client(self, client: Client):
+    # Set the parameter client 
     self.order.client = client
     return self
 
 
-  def set_coupon(self, coupon):
+  def set_coupon(self, coupon: str):
+    # Set the optional parameter 'coupon'
     self.order.coupon = coupon
     return self
 
 
-  def set_address(self, address):
+  def set_address(self, address: str):
+    # Set the optional parameter 'address'
     self.order.address = address
     return self
 
 
   def set_pay_method(self, pay_method):
+    # Set the optional parameter 'pay_method'
     self.order.pay_method = pay_method
     return self
 
 
-  def set_observation(self, observation):
+  def set_observation(self, observation: str):
+    # Set the optional parameter 'observation'
     self.order.observation = observation
     return self
 
 
-  def add_product(self, product):
+  def add_product(self, product: Product):
+    # Add a product item with type Product
     for old_product in self.order.products:
       if old_product.name == product.name:
         old_product.quantiy += product.quantity
@@ -87,6 +93,7 @@ class OrderBuilder():
     return self
 
   def add_product_by_name(self, name: str, price: float, quantity: int = 1):
+    # Add a product by its values
     for old_product in self.order.products:
       if old_product.name == name:
         old_product.quantity += quantity

@@ -2,14 +2,14 @@
 import AppConfig, Order, Payment, ChannelFactory
 
 class BuildSampleOrder:
-    def build_grocery_order():
+    def build_grocery_order(processor):
         maca = Order.Product("Maçã", 1.00, 4)
         macarrao = Order.Product("Macarrão", 3.99, 6)
         return (Order.OrderBuilder(Order.Order)
              .set_client(Order.Client("Ada Lovelace"))
              .set_address("Rua Voluntários da Pátria")
              .set_coupon("OMELHORCUPOM")
-             #.set_pay_method(self.processor.create_payment())
+             .set_pay_method(processor.create_payment())
              .set_observation("Pedido deve ser entregue com urgência")
              .add_product(maca)
              .add_product(macarrao)
@@ -51,4 +51,4 @@ channels = {
         }
 chosen_processor = Payment.PixProcessor()
 
-Flow(channels, chosen_processor).main("WEB", BuildSampleOrder.build_grocery_order)
+Flow(channels, chosen_processor).main("WEB", BuildSampleOrder.build_grocery_order(chosen_processor))
