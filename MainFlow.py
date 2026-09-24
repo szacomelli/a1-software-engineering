@@ -25,7 +25,7 @@ class Flow:
     def main(self, channel, get_order):
         config = AppConfig.AppConfig("production", "BRL", True)
 
-        order = get_order()
+        order = get_order(self.processor)
 
         channel_factory = ChannelFactory.get_channel_factory(channel)
         checkout = channel_factory.create_checkout()
@@ -51,4 +51,4 @@ channels = {
         }
 chosen_processor = Payment.PixProcessor()
 
-Flow(channels, chosen_processor).main("WEB", BuildSampleOrder.build_grocery_order(chosen_processor))
+Flow(channels, chosen_processor).main("WEB", BuildSampleOrder.build_grocery_order)
