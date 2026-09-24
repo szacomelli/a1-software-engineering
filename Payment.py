@@ -29,6 +29,9 @@ class BoletoPayment(Payment):
     def pay(self, amount):
         print(f"Pagou-se R${amount} com boleto")
 
+class BitcoinPayment(Payment):
+    def pay(self, amount):
+        print(f"Pagou-se R${amount} com bitcoin")
 
 class PixProcessor(PaymentProcessor):
     def create_payment(self):
@@ -41,3 +44,7 @@ class CreditCardProcessor(PaymentProcessor):
 class BoletoProcessor(PaymentProcessor):
     def create_payment(self):
         return BoletoPayment()
+    
+class BitcoinProcessor(PaymentProcessor):
+    def create_payment(self):
+        return BitcoinPayment()
