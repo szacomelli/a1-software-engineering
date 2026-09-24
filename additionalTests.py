@@ -65,13 +65,31 @@ class testBuilder(unittest.TestCase):
 class testFabric(unittest.TestCase):
   # Aditional tests for the fabric
 
-  def test_types(self):
+  def test_web_types(self):
     # Tests the checkout and notification are created correctly
     factory = ChannelFactory.WebFactory()
     checkout = factory.create_checkout()
     notification = factory.create_notification()
     self.assertIsInstance(checkout, ChannelFactory.WebCheckout)
     self.assertIsInstance(notification, ChannelFactory.WebNotification)
+
+
+  def test_mobile_types(self):
+    # Tests the checkout and notification are created correctly
+    factory = ChannelFactory.MobileFactory()
+    checkout = factory.create_checkout()
+    notification = factory.create_notification()
+    self.assertIsInstance(checkout, ChannelFactory.MobileCheckout)
+    self.assertIsInstance(notification, ChannelFactory.MobileNotification)
+
+
+  def test_kiosk_types(self):
+    # Tests the checkout and notification are created correctly
+    factory = ChannelFactory.KioskFactory()
+    checkout = factory.create_checkout()
+    notification = factory.create_notification()
+    self.assertIsInstance(checkout, ChannelFactory.KioskCheckout)
+    self.assertIsInstance(notification, ChannelFactory.KioskNotification)
 
 
 if __name__ == '__main__':
