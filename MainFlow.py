@@ -2,14 +2,14 @@
 import AppConfig, Order, Payment, ChannelFactory
 
 class BuildSampleOrder:
-    def build_grocery_order():
+    def build_grocery_order(processor):
         maca = Order.Product("Maçã", 1.00, 4)
         macarrao = Order.Product("Macarrão", 3.99, 6)
         return (Order.OrderBuilder(Order.Order)
              .set_client(Order.Client("Ada Lovelace"))
              .set_address("Rua Voluntários da Pátria")
              .set_coupon("OMELHORCUPOM")
-             #.set_pay_method(self.processor.create_payment())
+             .set_pay_method(processor.create_payment())
              .set_observation("Pedido deve ser entregue com urgência")
              .add_product(maca)
              .add_product(macarrao)
@@ -25,7 +25,7 @@ class Flow:
     def main(self, channel, get_order):
         config = AppConfig.AppConfig("production", "BRL", True)
 
-        order = get_order()
+        order = get_order(self.processor)
 
         channel_factory = ChannelFactory.get_channel_factory(channel)
         checkout = channel_factory.create_checkout()
